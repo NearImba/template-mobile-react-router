@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React template release</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var dpr, rem, scale;
+            var docEl = document.documentElement;
+            var appEl = document.querySelector('#app');
+            var fontEl = document.createElement('style');
+            var metaEl = document.querySelector('meta[name="viewport"]');
+            if (window.screen.width < 750) {
+                dpr = 1 || window.devicePixelRatio; // 这里本应该用设备dpr但是android webview有bug scale无效
+                scale = 1 / dpr;
+                rem = docEl.clientWidth * dpr / 7.5;
+            } else {
+                dpr = 1;
+                scale = 1;
+                rem = 100;
+            }
+
+            metaEl.setAttribute('content', 'width=' + dpr * docEl.clientWidth + ',initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=no');
+            docEl.setAttribute('data-dpr', dpr);
+
+            // 动态写入样式
+            docEl.style.fontSize = rem + 'px';
+            appEl.style.width = docEl.clientWidth + 'px';
+            appEl.style.height = docEl.clientHeight + 'px';
+        }, false)
+    </script>
+</head>
+
+<body>
+    <div id='app'></div>
+    <script crossorigin src='https://static.zhangmen.com/cdn/react.production.min.js'></script>
+    <script crossorigin src='https://static.zhangmen.com/cdn/react-dom.production.min.js'></script>
+</body>
+
+</html>
